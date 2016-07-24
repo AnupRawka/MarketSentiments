@@ -10,17 +10,20 @@ object ScalaProducer {
 
   def run(tweets: (String, scala.collection.mutable.Buffer[String])){
 
-    var producer: KafkaProducer[String, scala.collection.mutable.Buffer[String]] = null
+    var producer: KafkaProducer[String, String] = null
     try {
       val props = Resources.getResource("producer.props").openStream()
       val properties = new Properties()
       properties.load(props)
-      producer = new KafkaProducer[String, scala.collection.mutable.Buffer[String]](properties)
-      println("Tweets are ----:"+tweets)
-      producer.send(new ProducerRecord[String, scala.collection.mutable.Buffer[String]](tweets))
+      producer = new KafkaProducer[String, String](properties)
+      println("Tweets are ----:"+tweets._1)
+      //producer.send(new ProducerRecord[String, scala.collection.mutable.Buffer[String]](tweets._1,tweets._2))
+      //producer.send(new ProducerRecord[String, String]("my name is khan",scala.collection.mutable.Buffer[String]("htg").toString()))
+      producer.send(new ProducerRecord[String, String]("test",tweets._1))
+      producer.send(new ProducerRecord[String, String]("test",tweets._2.toString()))
       producer.flush()
       println("Sent msg")
-      producer.close()
+      //producer.close()
     }
     catch {
       case throwable: Throwable =>
@@ -29,9 +32,9 @@ object ScalaProducer {
         throwable.printStackTrace(pw);
         println(sw.toString())
     }
-    //finally {
-      //producer.close()
-    //}
+    finally {
+      producer.close()
+    }
   }
 }
 //object ScalaProducer {

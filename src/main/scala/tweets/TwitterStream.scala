@@ -50,6 +50,8 @@ object Util {
         val tweet: (String, scala.collection.mutable.Buffer[String]) = (tickerId, tweetMap(tickerId))
 
         ScalaProducer.run(tweet)
+        val cons = new ScalaConsumer()
+        cons.run
       }
     }
   }
