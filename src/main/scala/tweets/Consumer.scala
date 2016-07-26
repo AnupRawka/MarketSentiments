@@ -31,7 +31,7 @@ class ScalaConsumer {
       var timeouts = 0
 
       while (true) {
-        //println("consumer loop running, wait for messages")
+        println("consumer loop running, wait for messages")
         // read records with a short timeout. If we time out, we don't really care.
         val records : ConsumerRecords[String, String] = consumer.poll(200)
         val recordCount = records.count()
@@ -46,6 +46,7 @@ class ScalaConsumer {
           val record : ConsumerRecord[String,String] = iter.next()
           println(record)
           println(record.value())
+          consumer.close()
         }
       }
     }
@@ -55,7 +56,7 @@ class ScalaConsumer {
         println(s"Got exception : $st")
     }
     finally {
-      consumer.close()
+      //consumer.close()
     }
   }
 }
