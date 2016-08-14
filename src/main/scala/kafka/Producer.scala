@@ -1,26 +1,30 @@
-package tweets
+package kafka
 
 import java.io.{PrintWriter, StringWriter}
 import java.util.Properties
+
 import com.google.common.io.Resources
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
-import scala.collection.mutable
 
+/**
+  * Created by Astha on 7/26/2016.
+  */
 object ScalaProducer {
 
-  def run(tweets: (String, scala.collection.mutable.Buffer[String])){
-
+  //---commented on 07/31---
+  def run(tweets: (String, scala.collection.mutable.Buffer[String])) {
+    //def run(tweets: (String, String)){
     var producer: KafkaProducer[String, String] = null
     try {
       val props = Resources.getResource("producer.props").openStream()
       val properties = new Properties()
       properties.load(props)
       producer = new KafkaProducer[String, String](properties)
-      println("Tweets are ----:"+tweets._1)
+      //println("Tweets are -------------------:"+tweets._2)
       //producer.send(new ProducerRecord[String, scala.collection.mutable.Buffer[String]](tweets._1,tweets._2))
       //producer.send(new ProducerRecord[String, String]("my name is khan",scala.collection.mutable.Buffer[String]("htg").toString()))
-      producer.send(new ProducerRecord[String, String]("test",tweets._1))
-      producer.send(new ProducerRecord[String, String]("test",tweets._2.toString()))
+      //producer.send(new ProducerRecord[String, String]("test",tweets._1))
+      producer.send(new ProducerRecord[String, String]("test", tweets._2.mkString))
       producer.flush()
       println("Sent msg")
       //producer.close()
@@ -37,9 +41,3 @@ object ScalaProducer {
     }
   }
 }
-//object ScalaProducer {
-//  def main(args: Array[String]): Unit = {
-//    val scalaProducer = new ScalaProducer()
-//    //scalaProducer.run(args)
-//  }
-//}
