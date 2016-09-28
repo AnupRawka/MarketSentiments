@@ -13,4 +13,6 @@ object ApplicationConstants {
   final val DAILY_AGGREGATE_TABLE_NAME = "day_tweets"
   final val MIN30_AGGREGATE_TABLE_NAME = "min30_tweets"
   final val TIMESTAMP = "timestamp"
+  final val DATE_FORMAT ="yyyy/MM/dd HH:mm:ss"
+  final val MAX_COUNT=100
 }

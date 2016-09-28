@@ -17,7 +17,7 @@ object SentimentAnalyzer {
 
   def findSentiment(tweet: String): Double = {
     if (tweet != null && tweet.length > 0) {
-      println("Tweet is : " + tweet)
+      //println("Tweet is : " + tweet)
       val annotation: Annotation = pipeline.process(tweet)
       import scala.collection.JavaConversions._
       var sentiments = annotation.get(classOf[CoreAnnotations.SentencesAnnotation]).map {
