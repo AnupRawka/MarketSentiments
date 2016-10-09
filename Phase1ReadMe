@@ -1,0 +1,1 @@
+This is phase one of project and I will be adding comments in the code soon to make it more understandable. Right now the code is pulling the tweets directly out of Twitter Stream (I purposefully did it because of my personal system limitations but the cassandra parts works perfectly fine.)
